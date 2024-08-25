@@ -9,5 +9,5 @@ class Handler(ABC):
         pass
     @abstractmethod
     def regisetr_handlers(self, dp: Dispatcher) -> None:
-        """Реализация метода регистрации хендлера"""
+        """Implementation of the handler registration method"""
         pass

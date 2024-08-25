@@ -1,3 +1,0 @@
-
-
-START="Hi, aboba"

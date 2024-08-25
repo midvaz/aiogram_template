@@ -1,4 +1,3 @@
-
 import logging
 import types
 
@@ -7,9 +6,9 @@ from aiogram.types import Message, InlineKeyboardMarkup, CallbackQuery
 from aiogram.filters.command import Command
 from aiogram.exceptions import TelegramBadRequest
 
-
 from internal.handlers.handler import Handler
-
+from internal.repo.repository import Repo
+from internal.service.base.main import Base
 
 logger = logging.getLogger(__name__)
 # reg_c_data = CallbackData("register")
@@ -18,14 +17,17 @@ logger = logging.getLogger(__name__)
 class BaseCom(Handler):
     def __init__(self, repo:Repo) -> None:
         super().__init__()
-        self.repo= repo
+        self.base = Base(repo)
 
 
     async def __start(self, m: Message) -> None:
-        _ = await self.repo.user().add_user_id(m.from_user.id)
+        text = await self.base.start()
 
         await m.reply(
-            text=start_text,
+            text=text,
             reply=False,
-            reply_markup=start_menu
         )
+
+
+    def regisetr_handlers(self, dp: Dispatcher) -> None:
+        dp.message.register(self.__start, Command("/start"))
