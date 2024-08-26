@@ -6,8 +6,8 @@ from aiogram.types import Message, InlineKeyboardMarkup, CallbackQuery
 from aiogram.filters.command import Command
 from aiogram.exceptions import TelegramBadRequest
 
-from internal.handlers.handler import Handler
-from internal.repo.repository import Repo
+from internal.adaptors.handlers.handler import Handler
+from internal.adaptors.repo.repository import Repo
 from internal.service.base.main import Base
 
 logger = logging.getLogger(__name__)

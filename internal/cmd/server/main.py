@@ -3,22 +3,10 @@ import logging
 
 from aiogram import Bot, Dispatcher
 
-from internal.adaptors.handlers.base import BaseCom
-
 from internal.adaptors.repo.repository import Repo
+from internal.adaptors.routers import reg_handlers, reg_middleware
 from pkg.config import config
 from pkg.postgresql.connection import get_connection
-
-
-
-# async def reg_middleware(dp, session ):
-#     dp.middleware.setup(AuthMiddleware(session))
-
-# TODO: РЕГИСТРАЦИЮ НУЖНО ДЕЛАТЬ НА УРОВЕНЬ РАНЬШЕ
-async def reg_handlers(repo, cnf:config.Config):
-    base = Dispatcher()
-    com_start = BaseCom(repo)
-    com_start.regisetr_handlers(base)
 
 
 async def runer(CONFIG_FILE):
@@ -40,6 +28,7 @@ async def runer(CONFIG_FILE):
     repo = Repo(conn=conn)
     
     await reg_handlers(repo, cnf)
+    await reg_middleware(repo, dp, cnf)
 
     try:
         await dp.start_polling(bot)
