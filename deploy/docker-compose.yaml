@@ -4,7 +4,7 @@ services:
   postgres:
     build:
       context: .
-      dockerfile: DockerPostgresql
+      dockerfile: ./deploy/DockerPostgresql
     environment:
       POSTGRES_DB: "project"
       POSTGRES_USER: "root"
@@ -21,7 +21,7 @@ services:
   # python:
   #   build:
   #     context: .
-  #     dockerfile: PythonDockerFile
+  #     dockerfile: ./deploy/PythonDockerFile
   #   restart: always
   #   networks:
   #     - my_network
