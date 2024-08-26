@@ -15,16 +15,16 @@ services:
     ports:
       - "6666:5432"
     restart: always
-    networks:
-      - my_network
+    # networks:
+    #   - my_network
   
-  python:
-    build:
-      context: .
-      dockerfile: PythonDockerFile
-    restart: always
-    networks:
-      - my_network
+  # python:
+  #   build:
+  #     context: .
+  #     dockerfile: PythonDockerFile
+  #   restart: always
+  #   networks:
+  #     - my_network
 
   # mongo:
   #   image: mongo:4.4.18

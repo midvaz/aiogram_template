@@ -11,7 +11,6 @@ from internal.adaptors.repo.repository import Repo
 from internal.service.base.main import Base
 
 logger = logging.getLogger(__name__)
-# reg_c_data = CallbackData("register")
 
 
 class BaseCom(Handler):
@@ -30,4 +29,4 @@ class BaseCom(Handler):
 
 
     def regisetr_handlers(self, dp: Dispatcher) -> None:
-        dp.message.register(self.__start, Command("/start"))
+        dp.message.register(self.__start, Command("start"))

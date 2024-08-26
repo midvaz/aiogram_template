@@ -2,9 +2,10 @@
 import logging
 
 from aiogram import Bot, Dispatcher
+from aiogram.fsm.storage.memory import MemoryStorage
 
 from internal.adaptors.repo.repository import Repo
-from internal.adaptors.routers import reg_handlers, reg_middleware
+from internal.adaptors.routers import reg_handlers
 from pkg.config import config
 from pkg.postgresql.connection import get_connection
 
@@ -18,17 +19,21 @@ async def runer(CONFIG_FILE):
     )
 
     cnf = config.load_config(CONFIG_FILE)
-    # storage = MemoryStorage()
+    storage = MemoryStorage()
 
     bot = Bot(token=cnf.tg_data.token, parse_mode="HTML")
-    dp = Dispatcher()
+    dp = Dispatcher(
+        storage=storage
+    )
     
     conn = await get_connection(cnf)
 
     repo = Repo(conn=conn)
     
-    await reg_handlers(repo, cnf)
-    await reg_middleware(repo, dp, cnf)
+    routers:list = await reg_handlers(repo, cnf)
+    
+    for router in routers:
+        dp.include_router(router)
 
     try:
         await dp.start_polling(bot)
