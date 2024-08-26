@@ -1,0 +1,5 @@
+
+services:
+  postgresql: true
+  python: true
+  mongoDB: false
