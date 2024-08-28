@@ -16,7 +16,7 @@ class Tg_data:
     url: str
 
 @dataclass
-class Deamon:
+class Local_network:
     istrue: bool
 
 @dataclass
@@ -29,12 +29,12 @@ def load_config(path: str):
     config = configparser.ConfigParser()
     config.read(path)
     
-    deamon = Deamon(**config["deamon"])
-    if deamon.istrue == True:
+    deamon = Local_network(**config["local_network"])
+    if bool(deamon.istrue) == True:
         psql = "db_postgresql"
     else:
         psql = "db_postgresql_local"
-
+        
     return Config(
         db_psql=Database(**config[psql]),
         tg_data=Tg_data(**config["tg_bot"]),

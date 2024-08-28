@@ -51,7 +51,7 @@ up-postgresql:
 up-python:
 	@echo "Запуск Python..."
 	@sed -i 's/^isTrue=.*/isTrue=true/' $(BOT_CONFIG) || echo "isTrue не найден."
-	$(DC) -f $(DC_FILE_PATH) up -d python
+	$(DC) -f $(DC_FILE_PATH) up -d python 
 
 up-mongo:
 	@echo "Запуск MongoDB..."
