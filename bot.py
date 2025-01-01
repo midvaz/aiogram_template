@@ -2,7 +2,7 @@
 import asyncio
 from venv import logger
 
-from internal.cmd.server.main import runer
+from server.main import runer
 
 
 CONFIG_FILE = "./.config/bot.ini"

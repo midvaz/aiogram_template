@@ -1,5 +1,5 @@
 
-from internal.adaptors.repo.repository import Repo
+from internal.repositories.repository import Repo
 
 class User:
     def __init__(self, repo:Repo) -> None:

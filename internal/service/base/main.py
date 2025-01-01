@@ -1,6 +1,6 @@
 
-from internal.adaptors.repo.repository import Repo
-from internal.resources.messages.base import START
+from internal.repositories.repository import Repo
+from internal.app.messages.base import START
 
 class Base:
     def __init__(self, repo:Repo) -> None:

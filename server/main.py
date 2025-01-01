@@ -4,21 +4,21 @@ import logging
 from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
 
-from internal.adaptors.repo.repository import Repo
-from internal.adaptors.routers import reg_handlers
-from pkg.config import config
+from internal.repositories.repository import Repo
+from internal.main import reg_handlers
+from internal.config import config
 from pkg.postgresql.connection import get_connection
 
 
-async def runer(CONFIG_FILE):
-    logger = logging.getLogger(__name__)
+async def runer(CONFIG_FILE) -> None:
+    logger: logging.Logger = logging.getLogger(__name__)
 
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s - %(levelname)s - %(name)s - %(message)s"
     )
 
-    cnf = config.load_config(CONFIG_FILE)
+    cnf: config.Config = config.load_config(CONFIG_FILE)
     storage = MemoryStorage()
 
     bot = Bot(token=cnf.tg_data.token, parse_mode="HTML")
@@ -26,7 +26,13 @@ async def runer(CONFIG_FILE):
         storage=storage
     )
     
-    conn = await get_connection(cnf)
+    conn = await get_connection(
+        user=cnf.db_psql.user,
+        password=cnf.db_psql.password,
+        database=cnf.db_psql.database,
+        host=cnf.db_psql.host,
+        port=cnf.db_psql.port
+    )
 
     repo = Repo(conn=conn)
     

@@ -1,16 +1,16 @@
 import sys
 import asyncpg
 
-from pkg.config.config import Config
+from internal.config.config import Config
 
 
-async def get_connection(cnf:Config):
+async def get_connection(user :str, password :str, database :str, host :str, port :str):
     try:
         # TODO: НУЖНО ПЕРЕДАВАТЬ ИМЕННО ЗНАЧЕНИЕ, А НЕ КОНФ
         conn = await asyncpg.connect(
-            user=cnf.db_psql.user, password=cnf.db_psql.password,
-            database=cnf.db_psql.database, host=cnf.db_psql.host,
-            port=cnf.db_psql.port
+            user=user, password=password,
+            database=database, host=host,
+            port=port
         )
         asyncpg.create_pool()
         return conn

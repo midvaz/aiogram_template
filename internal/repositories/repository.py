@@ -1,6 +1,6 @@
 import asyncpg
 
-from internal.adaptors.repo.user import UserRepo
+from internal.repositories.user import UserRepo
 
 class Repo:
     """Db abstract level"""

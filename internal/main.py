@@ -1,8 +1,8 @@
 
 from aiogram import Router
 
-from internal.adaptors.handlers.base import BaseCom
-from pkg.config import config
+from internal.handlers.base import BaseCom
+from internal.config import config
 
 
 async def reg_handlers( repo, cnf:config.Config):
